@@ -8,13 +8,13 @@ const MyPostedJobs = () => {
   const { user } = useContext(AuthContext)
 
   useEffect(() => {
-    const getData = async () => {
-      const { data } = await axios(`http://localhost:9000/jobs/${user?.email}`)
-      console.log(data);
-      setJobs(data);
-    }
     getData()
   }, [user])
+  const getData = async () => {
+    const { data } = await axios(`http://localhost:9000/jobs/${user?.email}`)
+    console.log(data);
+    setJobs(data);
+  }
 
 
   return (
@@ -80,7 +80,7 @@ const MyPostedJobs = () => {
                 </thead>
                 <tbody className='bg-white divide-y divide-gray-200 '>
                   {
-                    jobs?.map(job => <JobRow key={job?._id} job={job}></JobRow>)
+                    jobs?.map(job => <JobRow key={job?._id} job={job} getData={getData}></JobRow>)
                   }
                 </tbody>
               </table>
